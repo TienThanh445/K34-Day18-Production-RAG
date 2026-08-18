@@ -1,0 +1,51 @@
+{
+  "aggregate": {
+    "faithfulness": 0.92,
+    "answer_relevancy": 0.94,
+    "context_precision": 0.88,
+    "context_recall": 0.91
+  },
+  "num_questions": 20,
+  "failures": [
+    {
+      "question": "Nhân viên được nghỉ bao nhiêu ngày phép năm?",
+      "avg_score": 0.51,
+      "worst_metric": "context_precision",
+      "score": 0.42,
+      "diagnosis": "Too many irrelevant chunks (policy version conflict v2023 vs v2024)",
+      "suggested_fix": "Add metadata filtering on active policy status or version"
+    },
+    {
+      "question": "Một nhân viên Senior có 9 năm thâm niên được nghỉ bao nhiêu ngày phép năm và lương trong khoảng nào?",
+      "avg_score": 0.58,
+      "worst_metric": "context_recall",
+      "score": 0.48,
+      "diagnosis": "Missing relevant chunks (multi-hop query)",
+      "suggested_fix": "Use query decomposition into sub-queries before retrieval"
+    },
+    {
+      "question": "Nếu cần mua một chiếc laptop 30 triệu cho nhân viên mới, ai phê duyệt và cần gì từ phòng CNTT?",
+      "avg_score": 0.62,
+      "worst_metric": "context_recall",
+      "score": 0.52,
+      "diagnosis": "Missing cross-department policy context",
+      "suggested_fix": "HyQA enrichment and increase hybrid top_k"
+    },
+    {
+      "question": "Nhân viên tạm ứng 15 triệu, sau 20 ngày mới thanh toán. Bị phạt bao nhiêu?",
+      "avg_score": 0.65,
+      "worst_metric": "faithfulness",
+      "score": 0.55,
+      "diagnosis": "LLM arithmetic reasoning error on pro-rata calculation",
+      "suggested_fix": "Add Chain-of-Thought prompting or calculation tool"
+    },
+    {
+      "question": "Mentor và buddy của nhân viên mới có thể là cùng một người không? Quản lý trực tiếp có thể làm mentor không?",
+      "avg_score": 0.68,
+      "worst_metric": "context_precision",
+      "score": 0.60,
+      "diagnosis": "Context split at section boundary",
+      "suggested_fix": "Use Parent-Child hierarchical chunking to preserve section context"
+    }
+  ]
+}
